@@ -72,6 +72,9 @@ void addEdges(vertex** vertexAddresses,int numOfVertices, int degree, int weight
     {
         int head = rand()%numOfVertices;
         int tail = rand()%numOfVertices;
+        while (tail == head){
+            tail = rand()%numOfVertices;
+        }
 
         //CHECK IF THE EDGE ALREADY EXISTS
         bool alreadyExists = false;
