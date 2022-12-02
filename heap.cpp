@@ -11,6 +11,8 @@ heap::heap(int size)
     maxSize = size;
     data = (heapElement**) malloc(maxSize * sizeof(heapElement*));
     heapIndex = (int*) malloc(maxSize * sizeof(int));
+    H = new int[maxSize];
+    D = new int[maxSize];
 }
 
 heap::~heap()
@@ -19,6 +21,8 @@ heap::~heap()
     if(data[i]!=nullptr)
         delete(data[i]);
     }
+    delete(H);
+    delete(D);
     free(data);
     data =  nullptr;
     free(heapIndex);
@@ -42,21 +46,31 @@ void heap::maxHeapify(int i){
     int l = left(i);
     int r = right(i);
     int largest;
-    if (l <= heapSize && data[l]->key>data[i]->key){
+    if (l <= heapSize && D[H[l]] > D[H[i]] ){
+        // &&data[l]->key>data[i]->key
         largest = l;
     }
     else{
         largest = i;
     }
-    if (r <= heapSize && data[r]->key > data[largest]->key){
+    // if (r <= heapSize && data[r]->key > data[largest]->key){
+    if (r <= heapSize && D[H[r]] > D[H[largest]]){
         largest = r;
     }
     if (largest != i){
-        heapElement* temp = data[i];
-        data[i] = data[largest];
-        data[largest] = temp;
-        heapIndex[data[i]->vertex] = i+1;
-        heapIndex[data[largest]->vertex] = largest+1;
+        // heapElement* temp = data[i];
+        // data[i] = data[largest];
+        // data[largest] = temp;
+
+        int temp = H[i];
+        H[i] = H[largest];
+        H[largest] = temp;
+
+        // heapIndex[data[i]->vertex] = i+1;
+        // heapIndex[data[largest]->vertex] = largest+1;
+
+        heapIndex[H[i]] = i+1;
+        heapIndex[H[largest]] = largest+1;
         maxHeapify(largest);
     }
 
@@ -74,10 +88,16 @@ void heap::insert(int vertex, int key){
     else if (key < 0) cout << "NEGATIVE INTEGERS CANNOT BE INSERTED" << endl;
     else{
         heapSize++;
-        heapElement* newElement = new heapElement;
-        newElement->vertex = vertex;
-        newElement->key = key;
-        data[heapSize] = newElement;
+
+        H[heapSize] = vertex;
+        D[vertex] = key;
+
+
+        // heapElement* newElement = new heapElement;
+        // newElement->vertex = vertex;
+        // newElement->key = key;
+        // data[heapSize] = newElement;
+
         heapIndex[vertex] = heapSize+1;
         buildHeap(heapSize);
     }
@@ -104,11 +124,18 @@ int heap::pop(){
         // cout << "Empty heap can't be popped" << endl;
         return -1;
     }
-    int return_val = data[0]->vertex;
+    // int return_val = data[0]->vertex;
+    int return_val = H[0];
+
+
     // cout << "data at 0 index accessed" << endl;
     // cout << "Heap size is " << heapSize << endl;
     // cout << "Data at heapsize is " << data[heapSize] << endl;
-    data[0] = data[heapSize];
+    
+    // data[0] = data[heapSize];
+    H[0] = H[heapSize];
+
+
     // cout << "Data at 0 is " << data[0] << endl;
     heapSize--;
     // cout << "Heap size in pop after decrement is " << heapSize << endl;
@@ -123,7 +150,8 @@ void heap::printHeap(){
     // cout << "Heap size is " << heapSize << endl;
     for(int i =0; i<=heapSize; i++)
     {
-        cout << data[i]->vertex << "-"<< data[i]->key << " ";
+        // cout << data[i]->vertex << "-"<< data[i]->key << " ";
+        cout << H[i] << "-"<< D[H[i]] << " ";
     }
     cout << endl;
 }
@@ -137,7 +165,8 @@ void heap::printHeapIndex(){
 
 void heap::changeKey(int vertex, int newKey){
     int index = heapIndex[vertex]-1;
-    data[index]->key = newKey;
+    // data[index]->key = newKey;
+    D[vertex] = newKey;
     buildHeap(index);
 }
 
@@ -147,7 +176,7 @@ int* heap::heapSort(){
 
     int largest = pop();
     while (largest!=-1){
-    sortedArray[indexInUse] = pop();
+    sortedArray[indexInUse] = largest;
     indexInUse++;
     largest = pop();
     }
