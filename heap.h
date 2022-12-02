@@ -2,14 +2,14 @@
 class heap
 {
 private:
-    struct heapElement
-    {
-        int vertex;
-        int key;
-    };
+    // struct heapElement
+    // {
+    //     int vertex;
+    //     int key;
+    // };
     int maxSize;
     int heapSize;
-    heapElement** data;
+    // heapElement** data;
 
     int* H;
     int* D;

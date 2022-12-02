@@ -211,6 +211,69 @@ void addEdges(vertex** vertexAddresses,int numOfVertices, int degree, int weight
 
 }
 
+void addEdges2(vertex** G,int numOfVertices, int weightMax){
+
+    int degreeMax = (int) numOfVertices/5;
+
+    int degreeOfVertex[numOfVertices];
+    for(int i = 0; i<numOfVertices; i++){
+        degreeOfVertex[i] = 2;
+    }
+
+    for(int i=0; i<numOfVertices; i++){
+        
+
+        // for (int j=0; j<degreeMax; j++){
+        while(degreeOfVertex[i]<degreeMax){
+            bool alreadyExists = false;
+            int newVertexNum;
+            int attempts = 0;
+            do
+            {
+                newVertexNum = rand()%numOfVertices;
+                alreadyExists = false;
+                for(adjListNode* n = G[i]->adjList; n!=nullptr; n=n->next)
+                {
+                    // cout << "(" << n->node->vertexNum << "," << n->weight <<") ";
+                    if (n->node->vertexNum == newVertexNum)
+                    {
+                        alreadyExists = true;
+                        break;
+                    }
+                }
+                attempts++;
+            } while ((newVertexNum == i || alreadyExists == true || degreeOfVertex[newVertexNum] > degreeMax) && attempts < 20);
+
+            int weight = rand()%weightMax;
+            while(weight == 0){
+                weight = rand()%weightMax;
+            }
+
+            adjListNode* newNode = new adjListNode;
+            newNode->node = G[newVertexNum];
+            newNode->weight = weight;
+            newNode->next = G[i]->adjList;
+            G[i]->adjList = newNode;
+            degreeOfVertex[i]++;
+
+            adjListNode* newNode2 = new adjListNode;
+            newNode2->node = G[i];
+            newNode2->weight = weight;
+            newNode2->next = G[newVertexNum]->adjList;
+            G[newVertexNum]->adjList = newNode2;
+            degreeOfVertex[newVertexNum]++;
+        }
+            
+    
+
+
+        
+
+        // newNode->node
+    }
+
+}
+
 void printAdjList(vertex** vertexAddresses, int numOfVertices){
 
     for (int i=0; i<numOfVertices; i++)
@@ -227,27 +290,39 @@ void printAdjList(vertex** vertexAddresses, int numOfVertices){
 
 
 vertex** generateGraph(int numOfVertices, int weightMax, int mode){
+    
+    
     int degree = 6;
-    if(mode == 1) degree = (int) numOfVertices/5;
+    // if(mode == 1) degree = (int) numOfVertices/5;
     srand(time(nullptr));
     vertex** G = genGraph(numOfVertices,weightMax);
-    addEdges(G,numOfVertices,degree,weightMax);
+
+    if (mode == 1){
+        addEdges2(G,numOfVertices,weightMax);
+    }
+    else
+        addEdges(G,numOfVertices,degree,weightMax);
     // cout << "Graph Generated" << endl;
     return G;
 }
 
 // int main(){
-//     int numOfVertices = 5000;
+//     int numOfVertices = 100;
 //     int degree = 6;
 //     int weightMax = 10;
 //     srand(time(nullptr));
 //     // float k = (float) 2/5000;
 //     // cout << "K IS " << k << endl;
-//     vertex** G1 = genGraph(numOfVertices,weightMax);
-//     addEdges1(G1,numOfVertices,degree,weightMax);
+//     // vertex** G1 = genGraph(numOfVertices,weightMax);
+//     // addEdges1(G1,numOfVertices,degree,weightMax);
 
-//     vertex** G2 = genGraph(numOfVertices, weightMax);
-//     addEdges1(G2,numOfVertices,numOfVertices/5, weightMax);
+//     // vertex** G2 = genGraph(numOfVertices, weightMax);
+//     // addEdges1(G2,numOfVertices,numOfVertices/5, weightMax);
+
+//     vertex** G1 = generateGraph(numOfVertices, weightMax, 0);
+//     vertex** G2 = generateGraph(numOfVertices, weightMax, 1);
+
+//     printAdjList(G1,numOfVertices);
 //     printAdjList(G2,numOfVertices);
 
 // }

@@ -9,7 +9,7 @@ heap::heap(int size)
 {
     heapSize = -1;
     maxSize = size;
-    data = (heapElement**) malloc(maxSize * sizeof(heapElement*));
+    // data = (heapElement**) malloc(maxSize * sizeof(heapElement*));
     heapIndex = (int*) malloc(maxSize * sizeof(int));
     H = new int[maxSize];
     D = new int[maxSize];
@@ -17,14 +17,14 @@ heap::heap(int size)
 
 heap::~heap()
 {
-    for(int i=0; i<heapSize; i++){
-    if(data[i]!=nullptr)
-        delete(data[i]);
-    }
+    // for(int i=0; i<heapSize; i++){
+    // if(data[i]!=nullptr)
+    //     delete(data[i]);
+    // }
     delete(H);
     delete(D);
-    free(data);
-    data =  nullptr;
+    // free(data);
+    // data =  nullptr;
     free(heapIndex);
     heapIndex = nullptr;
 }
