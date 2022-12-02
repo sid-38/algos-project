@@ -5,12 +5,14 @@ private:
     struct heapElement
     {
         int vertex;
-        int vertexTail = -1;
         int key;
     };
     int maxSize;
     int heapSize;
     heapElement** data;
+
+    int* H;
+    int* D;
 
     
     int parent(int i);

@@ -70,7 +70,7 @@ vertex** genGraph(int vertexNum, int weightMax){
 
     vertex** addresses = generateEmptyGraph(vertexNum);
 
-    cout << "Empty graph generated" << endl;
+    // cout << "Empty graph generated" << endl;
 
     for (int i=0; i<vertexNum; i++)
     {
@@ -117,7 +117,7 @@ vertex** genGraph(int vertexNum, int weightMax){
         // addresses[i]->adjList = tail;
     }
 
-    cout << "Cycle made" << endl;
+    // cout << "Cycle made" << endl;
 
     return addresses;
 }
@@ -149,9 +149,9 @@ void addEdges(vertex** vertexAddresses,int numOfVertices, int degree, int weight
         // cout << "Avg degree = " << (float)avg_degree/degree << endl;
         float percent_degree = (float) avg_degree/degree;
         // cout << percent_degree << endl;
-        if (percent_degree == 0.250000) cout << "25 graph generation done" << endl;
-        if (percent_degree == 0.500000) cout << "50 graph generation done" << endl;
-        if (percent_degree == 0.750000) cout << "75 graph generation done" << endl;
+        // if (percent_degree == 0.250000) cout << "25 graph generation done" << endl;
+        // if (percent_degree == 0.500000) cout << "50 graph generation done" << endl;
+        // if (percent_degree == 0.750000) cout << "75 graph generation done" << endl;
         int head = rand()%numOfVertices;
         int tail = rand()%numOfVertices;
         while (tail == head){
@@ -216,6 +216,7 @@ void printAdjList(vertex** vertexAddresses, int numOfVertices){
     for (int i=0; i<numOfVertices; i++)
     {
         cout << i << "-> ";
+        
         for(adjListNode* n = vertexAddresses[i]->adjList; n!=nullptr; n=n->next)
         {
             cout << "(" << n->node->vertexNum << "," << n->weight <<") ";
@@ -231,7 +232,7 @@ vertex** generateGraph(int numOfVertices, int weightMax, int mode){
     srand(time(nullptr));
     vertex** G = genGraph(numOfVertices,weightMax);
     addEdges(G,numOfVertices,degree,weightMax);
-    cout << "Graph Generated" << endl;
+    // cout << "Graph Generated" << endl;
     return G;
 }
 
