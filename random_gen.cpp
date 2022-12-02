@@ -16,32 +16,108 @@ struct adjListNode;
 // };
 
 
+
+vertex** generateEmptyGraph(int numOfVertices){
+    vertex** G =(vertex**) malloc( numOfVertices * sizeof(vertex*));
+    for(int i=0; i<numOfVertices; i++)
+    {
+        vertex* newVertex = new vertex;
+        newVertex->vertexNum=i;
+        G[i] = newVertex;
+    }
+    return G;
+}
+
+void addEdgeToGraph(vertex** G, int v, int w, int weight){
+    bool alreadyExists = false;
+    for(adjListNode* node = G[v]->adjList; node!=nullptr; node=node->next){
+        if(node->node->vertexNum == w){
+            alreadyExists = true;
+            break;
+        }
+    }
+
+    if(alreadyExists){
+        return;
+    }
+
+    adjListNode* newEdge = new adjListNode;
+    newEdge->node = G[w];
+    newEdge->next = G[v]->adjList;
+    newEdge->weight = weight;
+    G[v]->adjList = newEdge;
+
+    adjListNode* newEdge2 = new adjListNode;
+    newEdge2->node =  G[v];
+    newEdge2->next = G[w]->adjList;
+    newEdge2->weight = weight;
+    G[w]->adjList = newEdge2;
+
+    return;
+}
+
 vertex** genGraph(int vertexNum, int weightMax){
-    vertex** addresses =(vertex**) malloc(vertexNum * sizeof(vertex*));
+    // vertex** addresses =(vertex**) malloc(vertexNum * sizeof(vertex*));
 
-    for (int i =0 ; i < vertexNum ; i++)
-    {
-        vertex* a = (vertex*) malloc(sizeof(vertex));
-        // vertex a;
-        a->vertexNum = i;
-        addresses[i] = a;
-    }
+    // for (int i =0 ; i < vertexNum ; i++)
+    // {
+    //     vertex* a = (vertex*) malloc(sizeof(vertex));
+    //     // vertex a;
+    //     a->vertexNum = i;
+    //     addresses[i] = a;
+    // }
+    
 
-    for (int i=1; i<=vertexNum; i++)
+    vertex** addresses = generateEmptyGraph(vertexNum);
+
+    cout << "Empty graph generated" << endl;
+
+    for (int i=0; i<vertexNum; i++)
     {
+        int head = i-1;
+        int tail = i;
+
+        if (tail == 0) head = vertexNum-1;
+
+        int weight = rand()%weightMax;
+        while(weight==0){
+            weight = rand()%weightMax;
+        }
+
+        addEdgeToGraph(addresses,head,tail,weight);
+
+
+        // addEdgeToGraph(addresses,)
+
+        // adjListNode
         
-        adjListNode* head = (adjListNode*) malloc(sizeof(adjListNode));
-        if (i==vertexNum)
-        {
-            head->node = addresses[0];
-        }
-        else
-        {
-            head->node = addresses[i];
-        }
-        head->weight = rand()%weightMax;
-        addresses[i-1]->adjList = head;
+        // adjListNode* head = (adjListNode*) malloc(sizeof(adjListNode));
+        // if (i==vertexNum)
+        // {
+        //     head->node = addresses[0];
+        // }
+        // else
+        // {
+        //     head->node = addresses[i];
+        // }
+        // int newWeight = rand()%weightMax;
+        // while (newWeight == 0) {
+        //     newWeight = rand()%weightMax;
+        // }
+        // head->weight = newWeight;
+        // head->next = addresses[i-1]->adjList;
+        // addresses[i-1]->adjList = head;
+
+        // adjListNode* tail = (adjListNode*) malloc(sizeof(adjListNode));
+        // if(i==0) tail->node = addresses[vertexNum-1];
+        // else tail->node = addresses[i-1];
+
+        // tail->weight = newWeight;
+        // tail->next = addresses[i]->adjList;
+        // addresses[i]->adjList = tail;
     }
+
+    cout << "Cycle made" << endl;
 
     return addresses;
 }
@@ -70,6 +146,12 @@ void addEdges(vertex** vertexAddresses,int numOfVertices, int degree, int weight
 
     while (avg_degree < degree)
     {
+        // cout << "Avg degree = " << (float)avg_degree/degree << endl;
+        float percent_degree = (float) avg_degree/degree;
+        // cout << percent_degree << endl;
+        if (percent_degree == 0.250000) cout << "25 graph generation done" << endl;
+        if (percent_degree == 0.500000) cout << "50 graph generation done" << endl;
+        if (percent_degree == 0.750000) cout << "75 graph generation done" << endl;
         int head = rand()%numOfVertices;
         int tail = rand()%numOfVertices;
         while (tail == head){
@@ -90,6 +172,9 @@ void addEdges(vertex** vertexAddresses,int numOfVertices, int degree, int weight
 
         if(!alreadyExists){
             int weight = rand()%weightMax;
+            while(weight == 0){
+                weight = rand()%weightMax;
+            }
         
             // Add head - tail edge
             adjListNode* newHeadNode = (adjListNode*) malloc(sizeof(adjListNode));
@@ -138,6 +223,7 @@ void printAdjList(vertex** vertexAddresses, int numOfVertices){
         cout << endl;
     }
 }
+
 
 vertex** generateGraph(int numOfVertices, int weightMax, int mode){
     int degree = 6;

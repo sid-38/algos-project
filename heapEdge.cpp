@@ -1,44 +1,51 @@
 #include<iostream>
 #include <cmath>
-#include "heap.h"
+#include "heapEdge.h"
+#include <tuple>
 
 
-using namespace std;
+// using namespace std;
 
-heap::heap(int size)
+heapEdge::heapEdge(int size)
 {
     heapSize = -1;
     maxSize = size;
     data = (heapElement**) malloc(maxSize * sizeof(heapElement*));
-    heapIndex = (int*) malloc(maxSize * sizeof(int));
+    sortedArrayHead = nullptr;
+    sortedArrayTail = nullptr;
+    weights = nullptr;
+    // heapIndex = (int*) malloc(maxSize * sizeof(int));
 }
 
-heap::~heap()
+heapEdge::~heapEdge()
 {
     for(int i=0; i<heapSize; i++){
-    if(data[i]!=nullptr)
-        delete(data[i]);
+        if(data[i]!=nullptr)
+            delete(data[i]);
     }
+    if (sortedArrayHead!=nullptr) delete(sortedArrayHead);
+    if (sortedArrayTail!=nullptr) delete(sortedArrayTail);
+    if (weights!=nullptr) delete(weights);
     free(data);
     data =  nullptr;
-    free(heapIndex);
-    heapIndex = nullptr;
+    // free(heapIndex);
+    // heapIndex = nullptr;
 }
 
-int heap::parent(int i){
+int heapEdge::parent(int i){
 return floor((i-1)/2);
 }
 
-int heap::left(int i){
+int heapEdge::left(int i){
     return 2*i + 1;
 }
 
 
-int heap::right(int i){
+int heapEdge::right(int i){
     return 2*i + 2;
 }
 
-void heap::maxHeapify(int i){
+void heapEdge::maxHeapify(int i){
     int l = left(i);
     int r = right(i);
     int largest;
@@ -55,35 +62,20 @@ void heap::maxHeapify(int i){
         heapElement* temp = data[i];
         data[i] = data[largest];
         data[largest] = temp;
-        heapIndex[data[i]->vertex] = i+1;
-        heapIndex[data[largest]->vertex] = largest+1;
+        // heapIndex[data[i]->vertex] = i+1;
+        // heapIndex[data[largest]->vertex] = largest+1;
         maxHeapify(largest);
     }
 
 }
 
-void heap::buildHeap(int position){
+void heapEdge::buildHeap(int position){
     for (int i = parent(position); i>=0; i--){
         maxHeapify(i);
     }
 }
 
-void heap::insert(int vertex, int key){
-    // cout << "MAXSIZE = " << maxSize << endl;
-    if (heapSize >= maxSize) cout << "MAX SIZE EXCEEDED" << endl;
-    else if (key < 0) cout << "NEGATIVE INTEGERS CANNOT BE INSERTED" << endl;
-    else{
-        heapSize++;
-        heapElement* newElement = new heapElement;
-        newElement->vertex = vertex;
-        newElement->key = key;
-        data[heapSize] = newElement;
-        heapIndex[vertex] = heapSize+1;
-        buildHeap(heapSize);
-    }
-}
-
-// void heap::insert(int vertex, int tail, int key){
+// void heapEdge::insert(int vertex, int key){
 //     // cout << "MAXSIZE = " << maxSize << endl;
 //     if (heapSize >= maxSize) cout << "MAX SIZE EXCEEDED" << endl;
 //     else if (key < 0) cout << "NEGATIVE INTEGERS CANNOT BE INSERTED" << endl;
@@ -91,7 +83,6 @@ void heap::insert(int vertex, int key){
 //         heapSize++;
 //         heapElement* newElement = new heapElement;
 //         newElement->vertex = vertex;
-//         newElement->vertexTail = tail;
 //         newElement->key = key;
 //         data[heapSize] = newElement;
 //         heapIndex[vertex] = heapSize+1;
@@ -99,12 +90,30 @@ void heap::insert(int vertex, int key){
 //     }
 // }
 
-int heap::pop(){
+void heapEdge::insert(int vertex, int tail, int key){
+    // cout << "MAXSIZE = " << maxSize << endl;
+    if (heapSize >= maxSize) std::cout << "MAX SIZE EXCEEDED" << std::endl;
+    else if (key < 0) std::cout << "NEGATIVE INTEGERS CANNOT BE INSERTED" << std::endl;
+    else{
+        heapSize++;
+        heapElement* newElement = new heapElement;
+        // heapElement new newElement;
+        newElement->vertex = vertex;
+        newElement->vertexTail = tail;
+        newElement->key = key;
+        data[heapSize] = newElement;
+        // heapIndex[vertex] = heapSize+1;
+        // buildHeap(heapSize);
+    }
+}
+
+std::tuple<int, int,int> heapEdge::pop(){
     if (heapSize < 0){
         // cout << "Empty heap can't be popped" << endl;
-        return -1;
+        // return std::pair(-1,-1);
+        return std::make_tuple(-1,-1,-1);
     }
-    int return_val = data[0]->vertex;
+    std::tuple<int,int,int> return_val = std::make_tuple(data[0]->vertex,data[0]->vertexTail,data[0]->key);
     // cout << "data at 0 index accessed" << endl;
     // cout << "Heap size is " << heapSize << endl;
     // cout << "Data at heapsize is " << data[heapSize] << endl;
@@ -118,46 +127,51 @@ int heap::pop(){
     return return_val;
 }
 
-void heap::printHeap(){
+void heapEdge::printHeap(){
     // cout << "Printing heap" << endl;
     // cout << "Heap size is " << heapSize << endl;
     for(int i =0; i<=heapSize; i++)
     {
-        cout << data[i]->vertex << "-"<< data[i]->key << " ";
+        std::cout << "(" << data[i]->vertex << "," << data[i]->vertexTail << ")-"<< data[i]->key << " ";
     }
-    cout << endl;
+    std::cout << std::endl;
 }
 
-void heap::printHeapIndex(){
-    for(int i=0; i<=maxSize; i++)
-    {
-        cout << i << "->" << heapIndex[i] << endl;
-    }
-}
+// void heapEdge::printHeapIndex(){
+//     for(int i=0; i<=maxSize; i++)
+//     {
+//         cout << i << "->" << heapIndex[i] << endl;
+//     }
+// }
 
-void heap::changeKey(int vertex, int newKey){
-    int index = heapIndex[vertex]-1;
-    data[index]->key = newKey;
-    buildHeap(index);
-}
+// void heapEdge::changeKey(int vertex, int newKey){
+//     int index = heapIndex[vertex]-1;
+//     data[index]->key = newKey;
+//     buildHeap(index);
+// }
 
-int* heap::heapSort(){
-    int* sortedArray = new int[heapSize+1];
+std::tuple<int*,int*,int*,int> heapEdge::heapSort(){
+    sortedArrayHead = new int[heapSize+1];
+    sortedArrayTail = new int[heapSize+1];
+    weights = new int[heapSize+1];
     int indexInUse = 0;
 
-    int largest = pop();
-    while (largest!=-1){
-    sortedArray[indexInUse] = pop();
+    buildHeap(heapSize);
+
+    std::tuple<int,int,int> largest = pop();
+    while (std::get<0>(largest)!=-1){
+    sortedArrayHead[indexInUse] = std::get<0>(largest);
+    sortedArrayTail[indexInUse] = std::get<1>(largest);
+    weights[indexInUse] = std::get<2>(largest);
     indexInUse++;
     largest = pop();
     }
-    return sortedArray;
+    return std::make_tuple(sortedArrayHead,sortedArrayTail,weights,indexInUse);
 }
 
 // int main(){
 //     return 0;
 // }
-
 // int main(){
 
 //     heap myHeap(10);

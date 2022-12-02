@@ -1,11 +1,13 @@
 #pragma once
-class heap
+#include<utility>
+
+class heapEdge
 {
 private:
     struct heapElement
     {
         int vertex;
-        int vertexTail = -1;
+        int vertexTail;
         int key;
     };
     int maxSize;
@@ -18,20 +20,22 @@ private:
     int right(int i);
     void maxHeapify(int i);
     void buildHeap(int position);
-    int* heapIndex;
+    // int* heapIndex;
 
     
 
 public:
-    heap(int maxSize);
-    ~heap();
-    void insert(int vertex, int key);
-    // void heap::insert(int vertex, int tail, int key);
-    int pop();
+    heapEdge(int maxSize);
+    ~heapEdge();
+    void insert(int head, int tail, int key);
+    std::tuple<int,int,int> pop();
     void printHeap();
     void printHeapIndex();
     void changeKey(int vertex, int newKey);
-    int* heapSort();
+    std::tuple<int*, int*, int*, int> heapSort();
+    int* sortedArrayHead;
+    int* sortedArrayTail;
+    int* weights;
 
 
 };
