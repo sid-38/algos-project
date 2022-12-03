@@ -41,13 +41,9 @@ int findLargestFringerHeap(heap* myHeap){
 
 pair<int*,int*> dijkstra(vertex** G, int numOfVertices, int s){
 
-// cout << "Dijkstra starting..." << endl;
-// cout << "Initializaion" << endl;
 int status[numOfVertices] = {};
-// int b_width[numOfVertices] = {};
 int* b_width = new int[numOfVertices];
 int* dad = new int[numOfVertices];
-// int dad[numOfVertices] = {};
 
 status[s] = in_tree;
 b_width[s] = numeric_limits<int>::infinity();
@@ -152,9 +148,10 @@ while (largestFringer != -1){
             myHeap.insert(w,b_width[w]);
         }
         else if(status[w]==fringer && b_width[w]<min(b_width[largestFringer],v->weight)){
-            // CRITICAL POINT
             dad[w] = largestFringer;
+            // cout << "Calling change Key in vertex"<< w <<"- Old =" << b_width[w] << " Old in Heap = " << myHeap.D[w];
             b_width[w] = min(b_width[largestFringer], v->weight);
+            // cout << ", New= " << b_width[w] << endl;
             myHeap.changeKey(w,b_width[w]);
         }
         

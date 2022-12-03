@@ -1,0 +1,265 @@
+GRAPH 1
+SPARSE
+0.
+Running time
+Dijkstra = 47099
+Dijkstra Heap = 2127
+Kruskal = 11186
+1.
+Running time
+Dijkstra = 46930
+Dijkstra Heap = 2080
+Kruskal = 11108
+2.
+Running time
+Dijkstra = 47349
+Dijkstra Heap = 2112
+Kruskal = 11168
+3.
+Running time
+Dijkstra = 47339
+Dijkstra Heap = 2355
+Kruskal = 11134
+4.
+Running time
+Dijkstra = 47689
+Dijkstra Heap = 2381
+Kruskal = 11258
+DENSE
+0.
+Running time
+Dijkstra = 280926
+Dijkstra Heap = 283043
+Kruskal = 3805522
+1.
+Running time
+Dijkstra = 354908
+Dijkstra Heap = 348450
+Kruskal = 3929728
+2.
+Running time
+Dijkstra = 288535
+Dijkstra Heap = 287964
+Kruskal = 3673431
+3.
+Running time
+Dijkstra = 307045
+Dijkstra Heap = 302726
+Kruskal = 3950519
+4.
+Running time
+Dijkstra = 283154
+Dijkstra Heap = 289120
+Kruskal = 3575919
+GRAPH 2
+SPARSE
+0.
+Running time
+Dijkstra = 47018
+Dijkstra Heap = 2101
+Kruskal = 11350
+1.
+Running time
+Dijkstra = 46681
+Dijkstra Heap = 2071
+Kruskal = 11211
+2.
+Running time
+Dijkstra = 47045
+Dijkstra Heap = 2021
+Kruskal = 11324
+3.
+Running time
+Dijkstra = 46793
+Dijkstra Heap = 2079
+Kruskal = 11111
+4.
+Running time
+Dijkstra = 46759
+Dijkstra Heap = 2017
+Kruskal = 11198
+DENSE
+0.
+Running time
+Dijkstra = 327548
+Dijkstra Heap = 326509
+Kruskal = 3571560
+1.
+Running time
+Dijkstra = 283227
+Dijkstra Heap = 286203
+Kruskal = 3572739
+2.
+Running time
+Dijkstra = 284789
+Dijkstra Heap = 287252
+Kruskal = 3570417
+3.
+Running time
+Dijkstra = 282350
+Dijkstra Heap = 283225
+Kruskal = 3571591
+4.
+Running time
+Dijkstra = 281770
+Dijkstra Heap = 287508
+Kruskal = 3571318
+GRAPH 3
+SPARSE
+0.
+Running time
+Dijkstra = 47106
+Dijkstra Heap = 2110
+Kruskal = 11435
+1.
+Running time
+Dijkstra = 45582
+Dijkstra Heap = 1855
+Kruskal = 11307
+2.
+Running time
+Dijkstra = 46090
+Dijkstra Heap = 1868
+Kruskal = 11326
+3.
+Running time
+Dijkstra = 41725
+Dijkstra Heap = 1793
+Kruskal = 11170
+4.
+Running time
+Dijkstra = 45919
+Dijkstra Heap = 1846
+Kruskal = 11067
+DENSE
+0.
+Running time
+Dijkstra = 288742
+Dijkstra Heap = 286169
+Kruskal = 3573358
+1.
+Running time
+Dijkstra = 281273
+Dijkstra Heap = 285885
+Kruskal = 3580200
+2.
+Running time
+Dijkstra = 280332
+Dijkstra Heap = 287791
+Kruskal = 3569481
+3.
+Running time
+Dijkstra = 284890
+Dijkstra Heap = 286753
+Kruskal = 3691993
+4.
+Running time
+Dijkstra = 302907
+Dijkstra Heap = 312253
+Kruskal = 3895302
+GRAPH 4
+SPARSE
+0.
+Running time
+Dijkstra = 54053
+Dijkstra Heap = 2423
+Kruskal = 12851
+1.
+Running time
+Dijkstra = 54368
+Dijkstra Heap = 2381
+Kruskal = 12521
+2.
+Running time
+Dijkstra = 52632
+Dijkstra Heap = 2346
+Kruskal = 12482
+3.
+Running time
+Dijkstra = 53414
+Dijkstra Heap = 2318
+Kruskal = 13084
+4.
+Running time
+Dijkstra = 52526
+Dijkstra Heap = 2105
+Kruskal = 12663
+DENSE
+0.
+Running time
+Dijkstra = 280669
+Dijkstra Heap = 291313
+Kruskal = 4014900
+1.
+Running time
+Dijkstra = 322828
+Dijkstra Heap = 306537
+Kruskal = 3750857
+2.
+Running time
+Dijkstra = 284728
+Dijkstra Heap = 297613
+Kruskal = 3735628
+3.
+Running time
+Dijkstra = 305410
+Dijkstra Heap = 298175
+Kruskal = 3694052
+4.
+Running time
+Dijkstra = 290306
+Dijkstra Heap = 304557
+Kruskal = 3778381
+GRAPH 5
+SPARSE
+0.
+Running time
+Dijkstra = 45208
+Dijkstra Heap = 1593
+Kruskal = 11589
+1.
+Running time
+Dijkstra = 46947
+Dijkstra Heap = 1916
+Kruskal = 11236
+2.
+Running time
+Dijkstra = 46690
+Dijkstra Heap = 1986
+Kruskal = 11276
+3.
+Running time
+Dijkstra = 46702
+Dijkstra Heap = 1972
+Kruskal = 11457
+4.
+Running time
+Dijkstra = 46400
+Dijkstra Heap = 1935
+Kruskal = 11255
+DENSE
+0.
+Running time
+Dijkstra = 287828
+Dijkstra Heap = 288354
+Kruskal = 3731130
+1.
+Running time
+Dijkstra = 296054
+Dijkstra Heap = 293409
+Kruskal = 3921346
+2.
+Running time
+Dijkstra = 262905
+Dijkstra Heap = 272815
+Kruskal = 3486313
+3.
+Running time
+Dijkstra = 273478
+Dijkstra Heap = 267143
+Kruskal = 3494665
+4.
+Running time
+Dijkstra = 273906
+Dijkstra Heap = 264668
+Kruskal = 3588461

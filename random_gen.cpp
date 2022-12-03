@@ -4,17 +4,6 @@ using namespace std;
 
 struct adjListNode;
 
-// struct vertex {
-//     int vertexNum;
-//     adjListNode* adjList = nullptr;
-// };
-
-// struct adjListNode {
-//     vertex* node;
-//     int weight = -1;
-//     adjListNode* next = nullptr;
-// };
-
 
 
 vertex** generateEmptyGraph(int numOfVertices){

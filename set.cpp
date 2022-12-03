@@ -2,13 +2,13 @@
 
 
 
-set::set(int numEdges)
+set::set(int numOfEls)
 {
-    numOfEdges = numEdges;
- parent = new int[numOfEdges];
- rank = new int[numOfEdges];
+    numOfElements = numOfEls;
+ parent = new int[numOfElements];
+ rank = new int[numOfElements];
 
- for(int i=0; i< numOfEdges; i++){
+ for(int i=0; i< numOfElements; i++){
     parent[i] = -2;
     rank[i] = -2;
  }
@@ -37,7 +37,7 @@ void set::unionSet(int e1, int e2){
 
 int set::find(int e){
     int r = e;
-    int* toBeMoved = new int[numOfEdges];
+    int* toBeMoved = new int[numOfElements];
     int index = 0;
     while(parent[r]!=-1){
         toBeMoved[index] = r;

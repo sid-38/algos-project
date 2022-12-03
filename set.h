@@ -7,7 +7,7 @@ private:
 public:
     int* parent;
     int* rank;
-    int numOfEdges;
+    int numOfElements   ;
     set(int numOfElements);
     ~set();
     void makeSet(int e);

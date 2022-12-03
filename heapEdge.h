@@ -13,16 +13,11 @@ private:
     int maxSize;
     int heapSize;
     heapElement** data;
-
-    
     int parent(int i);
     int left(int i);
     int right(int i);
     void maxHeapify(int i);
     void buildHeap(int position);
-    // int* heapIndex;
-
-    
 
 public:
     heapEdge(int maxSize);
@@ -36,7 +31,5 @@ public:
     int* sortedArrayHead;
     int* sortedArrayTail;
     int* weights;
-
-
 };
 

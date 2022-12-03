@@ -2,19 +2,10 @@
 class heap
 {
 private:
-    // struct heapElement
-    // {
-    //     int vertex;
-    //     int key;
-    // };
     int maxSize;
     int heapSize;
-    // heapElement** data;
 
-    int* H;
-    int* D;
 
-    
     int parent(int i);
     int left(int i);
     int right(int i);
@@ -25,16 +16,19 @@ private:
     
 
 public:
+    int* H;
+    int* D;
     heap(int maxSize);
     ~heap();
     void insert(int vertex, int key);
-    // void heap::insert(int vertex, int tail, int key);
     int pop();
     void printHeap();
     void printHeapIndex();
     void changeKey(int vertex, int newKey);
     int* heapSort();
-
+    // void heap::heapifyBottom(int i);
+    void increaseKey(int i, int key);
+    // void insert2(int vertex, int key);
 
 };
 
